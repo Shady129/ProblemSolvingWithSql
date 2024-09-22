@@ -1,6 +1,5 @@
-USE problem_solving;
+-- How do you find a user's third transaction using SQL window functions?
 
--- How to find a user's third transaction using SQL window functions?
 
 
 CREATE TABLE transactions (
@@ -17,7 +16,12 @@ VALUES
   (145, 24.99, '2022-01-26 12:00:00'),
   (111, 89.60, '2022-02-05 12:00:00'); 
   
-  
+
+
+
+
+--Solution #1
+
   WITH Cte as(
   SELECT user_id, spend, transaction_date,
   ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY transaction_date)AS Row_num
@@ -26,7 +30,10 @@ VALUES
   FROM Cte
   WHERE Row_num = 3;
   
-  
+
+
+
+--Solution #2
   
   SELECT user_id, spend, transaction_date
   FROM(SELECT user_id, spend, transaction_date,
