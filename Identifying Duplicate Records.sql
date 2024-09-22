@@ -1,4 +1,7 @@
 
+--Find duplicate records in a table.
+--Remove duplicate records in a table.
+
 CREATE TABLE Contacts (
     ContactID INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100),
@@ -42,9 +45,7 @@ SELECT * FROM Contacts;
 
 
 
-
-
--- Checking duplicate records
+--Find duplicate records in a table.
 
 SELECT *, 
 Row_Number() OVER(PARTITION BY Email ORDER BY Name) As Row_Num
@@ -52,7 +53,7 @@ FROM Contacts
 
 
 
--- Dropping duplicate records
+-- Remove duplicate records in a table.
 
 DELETE from Contacts
 where ContactID IN(SELECT ContactID  
